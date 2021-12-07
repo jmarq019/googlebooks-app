@@ -8,9 +8,15 @@ const resolvers = {
         users: async () =>{
             return await User.find({}).populate("savedBooks");
         },
-        
-        singleUser: async (parent, { userId }) => {
-            return await User.findOne({ _id: userId });
+        me: async (parent, args, context) =>{
+             
+            const myUser = await User.findOne( 
+                { 
+                context: user._id
+                })
+            const myNewuser = await myUser.populate("savedBooks").execPopulate();
+            return myUser;
+            
         }
     },
     Mutation: {
