@@ -46,6 +46,7 @@ const resolvers = {
             const token = signToken(user);
       
             return { token, user };
+        }
     },
     Mutation: {
         addUser: async (parent, args) => {
@@ -56,7 +57,7 @@ const resolvers = {
             })
         
         },
-        addThought: async (parent, { bookData }, context) => {
+        addBook: async (parent, { bookData }, context) => {
             if (context.user) {
               const book = await Book.create({
                 bookData,
@@ -76,7 +77,6 @@ const resolvers = {
             if (context.user) {
               const book = await Book.findOneAndDelete({
                 _id: boookId,
-                thoughtAuthor: context.user.username,
               });
       
               await User.findOneAndUpdate(
@@ -87,11 +87,11 @@ const resolvers = {
               return book;
             }
             throw new AuthenticationError('You need to be logged in!');
-          },
+          }
 
     } 
 
-};
+}
 
 
 
