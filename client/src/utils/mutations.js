@@ -25,13 +25,9 @@ mutation addUser($email: String!, $username: String!, $password String!) {
     token
     user {
       _id
-      first_name
-      last_name
-      username
-      email
-      password
-      profpic
-      aboutme
+    username
+    email
+    password
     }
   }
 }`;
