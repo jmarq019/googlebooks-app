@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String 
     password: String
+    savedBooks: [Book]
   }
 
   type Book {
@@ -14,12 +15,11 @@ const typeDefs = gql`
       description: String
       image: String
       link: String
-      savedBooks: [Book]
   }
 
   type Query {
+    me: User
     users: [User]
-    books: [Book]
   }
 
   type Mutation {
