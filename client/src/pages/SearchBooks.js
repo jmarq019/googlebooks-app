@@ -3,6 +3,7 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'reac
 
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME, QUERY_BOOKS } from '../utils/queries';
+import { ADD_BOOK } from '../utils/mutations'
 
 
 const SearchBooks = () => {
@@ -64,17 +65,17 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await saveBook(bookToSave, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-    } catch (err) {
+      const newBook = await addServicePost({ 
+          variables: {
+              bookId : bookId,
+          },
+      });
+  } 
+  catch (err) {
+      
       console.error(err);
-    }
+  }
+
   };
 
   return (
