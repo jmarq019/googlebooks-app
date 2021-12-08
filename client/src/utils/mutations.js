@@ -16,6 +16,7 @@ export const LOGIN_USER = gql`
       description
       image
       link
+      authors
         } 
       }
     }
@@ -33,4 +34,41 @@ mutation addUser($email: String!, $username: String!, $password: String!) {
     password
     }
   }
+}`;
+
+export const ADD_BOOK = gql`
+mutation addBook($input: savedBook!) {
+    saveBook(input: $input) {
+        _id
+        username
+        email
+        bookCount
+        savedBooks {
+            bookId
+            authors
+            link
+            description
+            bookId
+            image
+            title
+        }
+    }
+}`;
+
+export const REMOVE_BOOK =gql`
+mutation removeBook($bookId: ID!) {
+    removeBook(bookId: $bookId) {
+        _id
+        username
+        email
+        bookCount
+        savedBooks {
+            authors
+            description
+            bookId
+            image
+            link
+            title
+        }
+    }
 }`;
