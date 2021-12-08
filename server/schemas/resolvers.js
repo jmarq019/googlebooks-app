@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Book } = require('../models');
+const { User, BookSchema } = require('../models');
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -30,7 +30,7 @@ const resolvers = {
                 return book;
             }
         },
-        login: async (parent, { username, password }) => {
+        login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
       
             if (!user) {
