@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_BOOKS } from '../utils/queries';
 
 
 const SearchBooks = () => {
@@ -15,6 +15,8 @@ const SearchBooks = () => {
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
 
+  const { loading, data } = useQuery(QUERY_BOOKS);
+  const [addBook, { error }] = useMutation(ADD_BOOK);
 
 
   // create method to search for books and set state on form submit
