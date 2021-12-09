@@ -3,7 +3,6 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
-
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
@@ -16,6 +15,7 @@ const SignupForm = () => {
     email: '',
     password: '',
   });
+ 
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
@@ -36,7 +36,7 @@ const SignupForm = () => {
         variables: { ...formState },
       });
 
-      Auth.login(data.addUser.token);
+      // Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
