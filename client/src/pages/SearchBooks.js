@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-
+import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME, QUERY_BOOKS } from '../utils/queries';
 import { ADD_BOOK } from '../utils/mutations'
-
+import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
-  // create state for holding returned google api data
+
+  // create state to hold saved bookId values
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
-
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+
+
 
 
   const { loading, data } = useQuery(QUERY_BOOKS);
@@ -65,7 +68,7 @@ const SearchBooks = () => {
     }
 
     try {
-      const newBook = await addServicePost({ 
+      const newBook = await addBook({ 
           variables: {
               bookId : bookId,
           },

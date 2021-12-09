@@ -10,11 +10,6 @@ const LoginForm = () => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
-  };
-
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,7 +54,7 @@ const LoginForm = () => {
             placeholder='Your email'
             name='email'
             onChange={handleChange}
-            value={userFormData.email}
+            value={email}
             required
           />
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
@@ -72,13 +67,13 @@ const LoginForm = () => {
             placeholder='Your password'
             name='password'
             onChange={handleChange}
-            value={userFormData.password}
+            value={password}
             required
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.email && userFormData.password)}
+          disabled={!(email && password)}
           type='submit'
           variant='success'>
           Submit
