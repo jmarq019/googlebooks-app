@@ -36,7 +36,7 @@ const SignupForm = () => {
         variables: { ...formState },
       });
 
-      // Auth.login(data.addUser.token);
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }

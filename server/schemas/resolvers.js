@@ -37,7 +37,8 @@ const resolvers = {
       }
     },
     addBook: async (parent, { bookData }, context) => {
-      if (context.user) {
+      try {
+        (context.user)
         const book = await Book.create({
           bookData,
           user: context.user,
@@ -49,11 +50,14 @@ const resolvers = {
         );
 
         return book;
-      }
+      } catch (err) {
+        console.log(err);
       throw new AuthenticationError('You need to be logged in!');
+      }
     },
     removeBook: async (parent, { bookId }, context) => {
-      if (context.user) {
+      try { 
+      (context.user) 
         const book = await Book.findOneAndDelete({
           _id: bookId,
         });
@@ -64,11 +68,14 @@ const resolvers = {
         );
 
         return book;
+      } catch (err) {
+        console.log(err);
+        throw new AuthenticationError('You need to be logged in!');
       }
-      throw new AuthenticationError('You need to be logged in!');
     },
     login: async (parent, { email, password }) => {
       console.log("login")
+      try {
       //look for the user by the email which has to be unique
       const user = await User.findOne({ email });
       //if there is no user with that email address then i need to return a authentication error
@@ -84,6 +91,9 @@ const resolvers = {
       //if email and password are correct, then sign the yser into the app with a jwt
       const token = signToken(user);
       return { token, user };
+    } catch (err) {
+      console.log(err);
+    }
     },
     
 
